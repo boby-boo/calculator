@@ -17,7 +17,7 @@ function show(e) {
         res.textContent = "";
         first, second, oper = null;
     }
-    if (elem == "=") {
+    // if (elem == "=") {
         if (first && second && oper) {
             switch (oper) {
                 case '*': 
@@ -39,7 +39,7 @@ function show(e) {
             }
             isEnter = true;
         }
-    }
+    // }
 
     if (isNaN(elem)) {
         if (arr.indexOf(elem) != -1) {
