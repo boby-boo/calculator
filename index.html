@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        button {
+            width: 75px;
+            height: 50px;
+        }
+
+        .main {
+
+            display: flex;
+            flex-wrap: wrap;
+
+        }
+
+        .tablo {
+            height: 50px;
+        }
+    </style>
+</head>
+
+<body>
+    <div style="width:300px">
+
+
+        <div style="width:300px">
+            <input class="tablo" id="monitor" style="width:300px" type="text">
+        </div>
+        <div class="main" id="numbers" style="width:300px">
+            <button id="1">1</button>
+            <button id="2">2</button>
+            <button id="3">3</button>
+            <button id="/">/</button>
+            <button id="4">4</button>
+            <button id="5">5</button>
+            <button id="6">6</button>
+            <button id="*">*</button>
+            <button id="7">7</button>
+            <button id="8">8</button>
+            <button id="9">9</button>
+            <button id="-">-</button>
+            <button id="C">C</button>
+            <button id="0">0</button>
+            <button id="=">=</button>
+            <button id="+">+</button>
+        </div>
+    </div>
+    <script>
+        let isEnter = false;
+        let first, second, oper;
+        let arr = ["+", "-", "*", "/"]
+        let monitor = document.querySelector("#monitor");
+        let numbers = document.querySelector("#numbers");
+        numbers.addEventListener("click", show)
+
+
+        function show(e) {
+            let elem = e.target.id;
+            if (e.target.id == "C") {
+                monitor.value = "";
+                first, second, oper = null;
+            }
+            if (e.target.id == "=") {
+                if (first && second && oper) {
+                    switch (oper) {
+                        case '*': monitor.value = first * second;
+                            break;
+                        case '/': monitor.value = first / second;
+                            break;
+                        case '-': monitor.value = first - second;
+                            break;
+                        case '+': monitor.value = Number(first) + Number(second);
+                            break;
+                    }
+                    isEnter = true;
+                }
+            }
+            if (isNaN(elem)) {
+                if (arr.indexOf(elem) != -1) {
+                    if (!isEnter) {
+                        if (first && !second) {
+                            oper = elem
+                            monitor.value = ''
+                        }
+                    } else {
+                        oper = elem;
+                        first = monitor.value;
+                        second = null;
+                        monitor.value = ''
+                    }
+                }
+            } else {
+                monitor.value += e.target.id
+                if (!second && !oper) {
+                    first = monitor.value;
+                }
+                if (first && oper) {
+                    second = monitor.value
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
