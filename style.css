@@ -17,10 +17,12 @@
     padding: 5px;
 
     font-size: 30px;
-    color: #464646;
+    color: #0e0e0e;
     outline: none;
     border: 1px solid;
     border-radius: 2px;
+
+    transition: all .3s ease;
 }
 .tablo {
     display: none;
@@ -57,6 +59,7 @@ button {
 }
 button:hover {
     background-color: #dcd9d9;
+
 }
 button:active {
     background-color: #bab6b6;
