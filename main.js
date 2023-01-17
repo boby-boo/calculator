@@ -3,7 +3,7 @@ let first, second, oper;
 let arr = ["+", "-", "*", "/"]
 let monitor = document.querySelector("#monitor");
 let numbers = document.querySelector("#numbers");
-let res = document.querySelector('.res')
+let res = document.querySelector('.res');
 
 numbers.addEventListener("click", show)
 
@@ -15,6 +15,7 @@ function show(e) {
 
     if (elem == "C") {
         resetValue()
+        animation('#613737')
     }
 
     if (first && second && oper) {
@@ -27,24 +28,32 @@ function show(e) {
         }
         isEnter = true;
     }
+
+    if (elem == '-' && !first) {
+        checkFirst = true;
+
+    }
+
     if (isNaN(elem)) {
 
     if (arr.indexOf(elem) != -1) {
         if (!isEnter) {
+
             if (first && !second) {
                 oper = elem;
                 monitor.value = '';                    
             }
-        } else {
-            oper = elem;
-            first = monitor.value;
+        } 
+        else {
+            oper = elem;  
+            first = monitor.value;        
             second = null;
             monitor.value = ''
         }
+
     }
     } else {
         monitor.value += elem;
-        
         if (!second && !oper) {
             first = monitor.value;
         }
@@ -52,12 +61,16 @@ function show(e) {
             second = monitor.value;
         }
     }
+    
 
     function resetValue() {
         monitor.value = null;
         res.textContent = '';
-        first = null;
-        second = null;
+        // first = null;
+        // second = null;
+        first = undefined;
+        second = undefined;
+        oper = undefined;
     }
     
     function createResult(first, operator, second) {
@@ -127,12 +140,13 @@ function show(e) {
         return res.textContent = monitor.value + ' ' + elem + ' ';
     }
 }
+function animation(color = '#2f533c') {
+    // res.style.background = '#bab6b6'
+    res.style.background = color
 
-function animation() {
-    res.style.background = '#bab6b6'
     setTimeout(()=> {
-        
-        res.style.background = '#fff'
+        res.style.background = '#3e3e3e'
+        // res.style.background = '#fff'
     }, 150)
     setTimeout
 }
